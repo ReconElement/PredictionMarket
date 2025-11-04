@@ -1,0 +1,31 @@
+generator client {
+  provider = "prisma-client"
+  output   = "../generated/prisma"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+enum UserRole{
+  ADMIN
+  USER
+}
+
+model prediction_user{
+  id        Int @id @default(autoincrement())
+  name      String
+  username  String 
+  email     String
+  password  String
+  role      UserRole  @default(USER)
+  funds     Decimal 
+}
+
+model prediction_markets{
+  id          String  @id @default(uuid())
+  title       String
+  description String
+  image_url   String
+}
